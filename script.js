@@ -24,9 +24,62 @@ function passChoicesPrompts() {
   prompt("Input password character count"));
 
   if (passLength == isNaN) {
-    alert('Please enter a numerical Value ');
+    alert('Please enter a numerical Value');
     return;
   }
+
+  if (passLength < 8) {
+    alert('Password too short - Must be min 8 characters');
+    return;
+  }
+
+  if (passLength > 128) {
+    alert('Password too long - Must be max 128 characters');
+    return;
+  }
+
+  var upperCaseCheck = confirm(
+    'Include Uppercase characters?'
+  );
+
+  var lowerCaseCheck = confirm(
+    'Include Lowercase characters?'
+  );
+
+  var numericCheck = confrim(
+    'Includes Numeric characters?'
+  );
+
+  var specCharCheck = confirm(
+    'Includes Special Characters?'
+  );
+
+  if ( 
+    upperCaseCheck == "" && lowerCaseCheck == "" && numericCheck == "" && specCharCheck == "") {
+      alert('Must include one character class');
+      return;
+    }
+  
+
+    // Logging User input with option - allows to pull without array repitition
+    var userChoices = {
+      length: passLength,
+      lower: lowerCaseCheck,
+      upper: upperCaseCheck,
+      numeric: numericCheck,
+      special: specCharCheck
+    };
+
+    return userChoices;
+}
+
+// Creating a function to pulling random elements from set arrays 
+
+function randPick(r) {
+  //Random element calculation
+  var randPos = Math.floor(Math.random() * r.length);
+  // Picks a random element from the array 
+  var randChar = r[randPos];
 }
 
 // Assignment Code
@@ -43,6 +96,8 @@ function writePassword() {
 
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
+
+
 
 
 
